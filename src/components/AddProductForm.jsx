@@ -36,7 +36,6 @@ const AddProductForm = () => {
 
     // เตรียมข้อมูลสินค้าใหม่ (แปลงตัวเลขจาก String เป็น Number)
     const newProduct = {
-      id: Date.now(), // ใช้ Timestamp เป็น ID ชั่วคราว
       name: formData.name,
       category: formData.category,
       imageUrl: formData.imageUrl,
