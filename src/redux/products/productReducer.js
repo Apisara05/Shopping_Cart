@@ -21,7 +21,7 @@ const productReducer = (state = initialSate, action) => {
       // วนลูปด้วย map
       return state.map((product) => {
         //กรณีที่ id ตรงกัน
-        if (product.id === action.payload.productId) {
+        if (product.id === action.payload) {
           return {
             ...product,
             quantity: product.quantity + action.payload.quantity,

@@ -1,55 +1,54 @@
 import React from "react";
+import { useDispatch } from "react-redux";
+import { addToCart } from "../redux/carts/action.js";
+import { removeFromCart } from "../redux/carts/action.js";
 
 const ProductItem = ({ product }) => {
-  // กำหนดค่า Default เผื่อกรณีข้อมูลไม่ครบ หรือยังไม่ได้ส่ง props มา
-  const {
-    name = "Laptop",
-    description = "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione fuga",
-    price = 1200,
-    stock = 10,
-    category = "Electronics",
-    imageUrl = "https://images.unsplash.com/photo-1587620962725-abab7fe55159?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80",
-  } = product || {};
+  const dispatch = useDispatch();
+  const handleAddToCart = () => {
+    dispatch(addToCart(product));
+    dispatch(removeFromCart(product.id));
+  };
+  const { name, category, imageUrl, price, quantity } = product;
 
   return (
-    // Card Container
-    <div className="w-full bg-[#1F222B] rounded-2xl overflow-hidden shadow-lg border border-gray-800 transition-transform hover:scale-105 duration-300">
-      {/* Image Section */}
-      <div className="relative h-48 overflow-hidden">
+    <div className="max-w-xs bg-[#1e252e] text-white rounded-xl overflow-hidden shadow-lg font-sans">
+      {/* Product Image Section */}
+      <div className="relative">
         <img
-          className="w-full h-full object-cover opacity-90 hover:opacity-100 transition-opacity duration-300"
-          src={imageUrl}
+          src={
+            imageUrl ||
+            "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?q=80&w=1000&auto=format&fit=crop"
+          }
           alt={name}
+          className="w-full h-48 object-cover opacity-80"
         />
-
         {/* Badge */}
-        <span className="absolute top-3 right-3 bg-[#EE46BC] text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wide shadow-sm">
+        <span className="absolute top-3 right-3 bg-[#e843b0] text-xs font-bold px-3 py-1 rounded-full">
           {category}
         </span>
       </div>
 
       {/* Content Section */}
-      <div className="p-5">
-        {/* Title */}
-        <h2 className="text-gray-100 text-xl font-bold mb-2 truncate">
-          {name}
-        </h2>
+      <div className="p-5 space-y-3">
+        <h2 className="text-xl font-semibold text-gray-100">{name}</h2>
 
-        {/* Description */}
-        <p className="text-gray-400 text-sm mb-5 leading-relaxed line-clamp-2">
-          {description}
+        <p className="text-sm text-gray-400 leading-relaxed">
+          Lorem ipsum dolor sit amet consectetur adipisicing elit.
         </p>
 
-        {/* Info Row (Availability & Price) */}
-        <div className="flex justify-between items-center mb-5 text-sm">
-          <span className="text-gray-300">
-            Available:{" "}
-            <span className={stock > 0 ? "text-green-400" : "text-red-400"}>
-              {stock}
-            </span>
-          </span>
-          <span className="text-gray-100 font-bold text-lg">${price}</span>
+        <div className="flex justify-between items-center pt-2">
+          <span className="text-sm text-gray-400">quantity: {quantity}</span>
+          <span className="text-lg font-bold text-gray-300">${price}</span>
         </div>
+
+        {/* Action Button */}
+        <button
+          onClick={handleAddToCart}
+          className="w-fit mt-2 bg-[#7c83fd] hover:bg-[#6b72ed] text-white font-medium py-2 px-6 rounded-lg transition-colors duration-200"
+        >
+          Buy Now
+        </button>
       </div>
     </div>
   );

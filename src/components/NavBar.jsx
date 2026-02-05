@@ -13,16 +13,15 @@ function NavBar() {
     ? carts.reduce((total, item) => total + item.quantity, 0)
     : 0;
 
-  const handlePageChange = (pageType) => {
-    dispatch({ type: pageType });
-  };
+ 
 
   return (
     <nav className="bg-[#1a1f3d] text-white py-4 px-8 flex justify-between items-center sticky top-0 z-50 shadow-md">
       {/* Logo: กดแล้วกลับหน้า Home ได้ด้วย */}
+      
       <div
         className="text-2xl font-bold tracking-wide cursor-pointer"
-        onClick={() => handlePageChange("HOME")}
+        onClick={() => dispatch({ type: "HOME" })}
       >
         ShoppingCart
       </div>
@@ -31,7 +30,7 @@ function NavBar() {
       <div className="flex items-center gap-6">
         {/* Home Link: เปลี่ยนจาก <a> เป็นปุ่มเพื่อให้กดแล้วไม่ refresh หน้า */}
         <button
-          onClick={() => handlePageChange("HOME")}
+          onClick={() => dispatch({ type: "HOME" })}
           className="hover:text-gray-300 transition-colors font-medium focus:outline-none"
         >
           Home
@@ -40,7 +39,7 @@ function NavBar() {
         {/* Cart Icon with Badge */}
         <div
           className="relative cursor-pointer hover:text-gray-200 transition-colors"
-          onClick={() => handlePageChange("CART")} // กดแล้วไปหน้า Cart
+          onClick={() => dispatch({ type: "CART" })} // กดแล้วไปหน้า Cart
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"

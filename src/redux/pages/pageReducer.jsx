@@ -5,7 +5,7 @@ const initialState = {
 const pagesReducer = (state = initialState, action) => {
   // ตัวจัดการ action
   switch (action.type) {
-    case "Home":
+    case "HOME":
       return { home: true };
     case "CART":
       return { home: false };
